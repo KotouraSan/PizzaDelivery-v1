@@ -3,6 +3,8 @@ package uz.ksan.backend.pizzadelivery.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import uz.ksan.backend.pizzadelivery.models.entities.ClientEntity;
 import uz.ksan.backend.pizzadelivery.models.entities.OrderEntity;
@@ -25,6 +27,8 @@ public class OrderServiceImpl implements uz.ksan.backend.pizzadelivery.service.O
     private final PizzaServiceImpl pizzaService;
     private final OrderRepository orderRepository;
 
+    @Override
+    @CachePut(value = "pizza")
     public OrderEntity createOrder(String username, List<String> pizzaNames) {
         //получаем клиента по имени пользователя
         ClientEntity client = clientRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Username not found"));
@@ -39,7 +43,7 @@ public class OrderServiceImpl implements uz.ksan.backend.pizzadelivery.service.O
             order.setPizzas(new ArrayList<>());
             order.setClient(client);
         } else {
-            order = client.getOrders().get(0);
+            order = client.getOrders().getFirst();
         }
 
 
@@ -52,10 +56,16 @@ public class OrderServiceImpl implements uz.ksan.backend.pizzadelivery.service.O
     }
 
     @Override
+    @Cacheable("pizza")
     public Optional<OrderEntity> findOrderById(Long id) {
         orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
         return orderRepository.findById(id);
     }
 
+    @Override
+    public OrderEntity deleteOrderById(String username, Long orderId) {
 
+        orderRepository.findById(orderId).ifPresent(orderRepository::delete);
+        return null;
+    }
 }

@@ -5,6 +5,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +28,7 @@ import java.util.Optional;
 @Transactional
 @RequestMapping("/api/v1/")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@EnableCaching
 public class ClientController {
 
     @Autowired

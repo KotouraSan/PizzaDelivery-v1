@@ -34,15 +34,16 @@ public class SecurityConfig {
                         "/api/v1/user/auth/**",
                         "/api/v1/auth/sign-in",
                         "/api/v1/auth/refresh",
-                        "/api/v1/orders/**"
+                        "/api/v1/orders/**",
+                        "/api/v1/pizza/"
                         ).permitAll()
 
                         .requestMatchers("/api/v1/client/displayAll",
-                                        "/api/v1/orders/makeOrder",
-                                        "/api/v1/pizza/**").hasAuthority("ROLE_ADMIN")
+                                        "/api/v1/pizza/newPizza").hasAuthority("ROLE_ADMIN")
 
                         .requestMatchers("/api/v1/client/profile",
-                                        "/api/v1/orders/makeOrder").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                                        "/api/v1/orders/create",
+                                        "/api/v1/orders/remove/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
                                 .requestMatchers("/api/v1/client/**").authenticated())
 

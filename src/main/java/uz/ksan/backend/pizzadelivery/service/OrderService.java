@@ -9,5 +9,6 @@ public interface OrderService {
 
     OrderEntity createOrder(String username, List<String> pizzaNames);
     Optional<OrderEntity> findOrderById(Long orderId);
+    OrderEntity deleteOrderById(String username ,Long orderId);
 
 }

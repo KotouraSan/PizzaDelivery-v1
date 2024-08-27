@@ -9,7 +9,7 @@ import uz.ksan.backend.pizzadelivery.models.entities.ClientEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ClientMapper {
-    @Mapping(source = "password", target = "password")
+
     ClientEntity toEntity(ClientDto clientDto);
     ClientDto toDto(ClientEntity client);
 }

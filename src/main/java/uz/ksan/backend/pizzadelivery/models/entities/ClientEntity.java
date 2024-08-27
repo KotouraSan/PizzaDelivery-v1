@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.ColumnTransformer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ClientEntity {
+public class ClientEntity implements Serializable {
 
     @SequenceGenerator(name="yourSequenceGeneratorClient", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="yourSequenceGeneratorClient")
@@ -29,7 +30,7 @@ public class ClientEntity {
     @ColumnTransformer(write = "LOWER(?)")
     String lastName;
 
-    @Column(unique=true)
+
     Long phoneNumber;
 
     @ColumnTransformer(write = "LOWER(?)")
@@ -37,8 +38,10 @@ public class ClientEntity {
 
     String role;
 
+    @NonNull
     String username;
 
+    @NonNull
     String password;
 
     String profileImageUrl;

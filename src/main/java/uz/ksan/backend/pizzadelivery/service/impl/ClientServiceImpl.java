@@ -2,6 +2,9 @@ package uz.ksan.backend.pizzadelivery.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +36,7 @@ public class ClientServiceImpl implements uz.ksan.backend.pizzadelivery.service.
 
 
     @Override
+    @CachePut(value = "clients", key = "#clientDto.username")
     public String addClient(ClientDto clientDto) {
         ClientEntity client = clientMapper.toEntity(clientDto);
         client.setPassword(passwordEncoder.encode(client.getPassword()));
@@ -42,6 +46,7 @@ public class ClientServiceImpl implements uz.ksan.backend.pizzadelivery.service.
     }
 
     @Override
+    @CachePut(value = "clients", key = "#client.username")
     public ClientEntity updateClient(ClientEntity client) {
         return clientRepository.save(client);
     }
@@ -58,6 +63,7 @@ public class ClientServiceImpl implements uz.ksan.backend.pizzadelivery.service.
     }
 
     @Override
+    @Cacheable(value = "clients", key = "#id")
     public ClientEntity findClientById(Long id) {
         return clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client with this id not found"));
     }
@@ -85,16 +91,19 @@ public class ClientServiceImpl implements uz.ksan.backend.pizzadelivery.service.
 //    }
 
     @Override
+    @Cacheable(value = "clients", key = "#phoneNumber")
     public ClientEntity findByPhoneNumber(Long phoneNumber) {
         return clientRepository.findByPhoneNumber(phoneNumber).orElseThrow(() -> new RuntimeException("Client with this Phone not found"));
     }
 
     @Override
+    @Cacheable(value = "clients", key = "#address")
     public Optional<ClientEntity> findByAddress(String address) {
         return clientRepository.findByAddress(address);
     }
 
     @Override
+    @CacheEvict(value = "clients", key = "#phoneNumber")
     public void deleteByPhoneNumber(Long phoneNumber) {
         clientRepository.findByPhoneNumber(phoneNumber)
                 .ifPresent(client -> clientRepository
@@ -102,6 +111,7 @@ public class ClientServiceImpl implements uz.ksan.backend.pizzadelivery.service.
     }
 
     @Override
+    @Cacheable(value = "clients", key = "{#firstName, #lastName, #phoneNumber, #address}")
     public List<ClientEntity> findByFilters(String firstName, String lastName, Long phoneNumber, String address) {
         return clientRepository.findByFilters(firstName, phoneNumber, lastName,address);
     }
@@ -124,6 +134,7 @@ public class ClientServiceImpl implements uz.ksan.backend.pizzadelivery.service.
     }
 
     @Override
+    @CachePut(value = "clients", key = "#username")
     public ClientEntity updateProfileImageUrl(String username, String profileImageUrl) {
         ClientEntity clients = clientRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Client with this username not found"));

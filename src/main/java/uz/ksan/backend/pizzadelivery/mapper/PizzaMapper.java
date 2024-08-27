@@ -12,7 +12,7 @@ import uz.ksan.backend.pizzadelivery.models.entities.PizzaEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PizzaMapper {
-    @Mapping(source = "name", target = "name")
+
     PizzaEntity toEntity(PizzaDto pizzaDto);
     PizzaDto toDto(PizzaEntity pizza);
 }

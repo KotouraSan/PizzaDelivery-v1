@@ -60,6 +60,15 @@ dependencies {
     //spring framework
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    //Mokito unit test
+    repositories { mavenCentral() }
+    dependencies { testImplementation "org.mockito:mockito-core:3.+" }
+
+
+    //h2 database
+    runtimeOnly 'com.h2database:h2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 
@@ -84,8 +93,8 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     //redis & cache
-//    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-//    implementation 'org.springframework.boot:spring-boot-starter-cache'}
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
 
 
 }
@@ -98,4 +107,5 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
+    jvmArgs '-XX:+EnableDynamicAgentLoading', '-Djdk.instrument.traceUsage'
 }

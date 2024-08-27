@@ -26,14 +26,14 @@ public class JwtService {
     public JwtAuthenticationDto generateAuthToken(String username) {            //генерация основого токена
         JwtAuthenticationDto jwtDto = new JwtAuthenticationDto();           //валидный 1 минуту, зачем используя
         jwtDto.setToken(generateJwtToken(username));                  //refresh токен, обновить основной
-        jwtDto.setRefreshToken(generateRefreshToken(username));
+//        jwtDto.setRefreshToken(generateRefreshToken(username));
         return jwtDto;
     }
 
     public JwtAuthenticationDto refreshBaseToken(String username, String refreshToken) {
         JwtAuthenticationDto jwtDto = new JwtAuthenticationDto();
         jwtDto.setToken(generateJwtToken(username));
-        jwtDto.setRefreshToken(refreshToken);                       //тот самый рефреш токен
+//        jwtDto.setRefreshToken(refreshToken);                       //тот самый рефреш токен
         return jwtDto;
     }
 
