@@ -35,6 +35,18 @@ This project is the backend for a pizzeria management system, developed using Sp
 - **OrderEntity**: Represents an order, containing selected pizzas and the total price.
 - **PizzaEntity**: Represents a pizza, including its name, description, and price.
 
+## Version v1 Updates
+
+In version v1 of the project, the following updates were made:
+
+- **Caching with Redis**: Added caching through Redis to improve application performance.
+- **Code Improvements**: Refactored and improved the code for several requests.
+- **Unit Testing**: Began studying and implementing unit tests, writing several tests for different classes.
+- **Load Testing**: Conducted load tests using JMeter, with a load of 4500 users over 30 seconds. The total number of requests was 36,000, with an average request time of 26 milliseconds.
+
+![image_2024-08-21_15-17-06](https://github.com/user-attachments/assets/71de1344-2f24-4b9b-b371-6c3d93bcc1ae)
+
+
 ## Installation
 
 To set up this project locally:
@@ -61,17 +73,6 @@ To set up this project locally:
 
 5. **Access the API**:
    - The API will be accessible at `http://localhost:8080/api/v1/`.
-
-## Version v1 Updates
-
-In version v1 of the project, the following updates were made:
-
-- **Caching with Redis**: Added caching through Redis to improve application performance.
-- **Code Improvements**: Refactored and improved the code for several requests.
-- **Unit Testing**: Began studying and implementing unit tests, writing several tests for different classes.
-- **Load Testing**: Conducted load tests using JMeter, with a load of 4500 users over 30 seconds. The total number of requests was 36,000, with an average request time of 26 milliseconds.
-
-![image_2024-08-21_15-17-06](https://github.com/user-attachments/assets/71de1344-2f24-4b9b-b371-6c3d93bcc1ae)
 
 
 ## Usage
