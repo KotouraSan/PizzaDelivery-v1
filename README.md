@@ -1,5 +1,3 @@
-
-
 # Pizzeria Backend 🍕
 
 This project is the backend for a pizzeria management system, developed using Spring Boot and Gradle. The application offers advanced functionalities for managing clients, orders, and pizzas, with a focus on implementing new and unique features beyond basic CRUD operations.
@@ -14,6 +12,7 @@ This project is the backend for a pizzeria management system, developed using Sp
 - **Lombok**: To reduce boilerplate code by automatically generating getters, setters, constructors, etc.
 - **JWT (JSON Web Token)**: For handling authentication and authorization via tokens.
 - **Jakarta Transaction**: For managing database transactions.
+- **Redis**: Implemented for caching to improve performance.
 
 ## Project Structure ⚙️
 
@@ -63,20 +62,24 @@ To set up this project locally:
 5. **Access the API**:
    - The API will be accessible at `http://localhost:8080/api/v1/`.
 
+## Version v1 Updates
+
+In version v1 of the project, the following updates were made:
+
+- **Caching with Redis**: Added caching through Redis to improve application performance.
+- **Code Improvements**: Refactored and improved the code for several requests.
+- **Unit Testing**: Began studying and implementing unit tests, writing several tests for different classes.
+- **Load Testing**: Conducted load tests using JMeter, with a load of 4500 users over 30 seconds. The total number of requests was 36,000, with an average request time of 26 milliseconds.
+
+![image_2024-08-21_15-17-06](https://github.com/user-attachments/assets/71de1344-2f24-4b9b-b371-6c3d93bcc1ae)
+
+
 ## Usage
 
 - **Authentication**: Use the `/api/v1/auth/sign-in` endpoint to authenticate and obtain a JWT token.
 - **Client Management**: Use the endpoints under `/api/v1/client/` to manage client data.
 - **Order Management**: Use the `/api/v1/orders/makeOrder` endpoint to create new orders.
 - **Pizza Management**: Use the `/api/v1/pizza/newPizza` endpoint to add new pizzas to the system.
-
-## Unique Functionalities 🚀
-
-This project goes beyond my standard CRUD operations that I have implemented in my previous projects. It introduces new and advanced functionalities, specifically developed for this application, such as:
-
-- **Advanced Order Processing**: The application includes integrated logic to handle complex order scenarios. It automatically identifies the client based on their JWT token and ensures that the order is accurately associated with the correct client, while also calculating the total price based on the selected pizzas.
-
----
 
 ## Troubleshooting 🛠️
 
@@ -104,8 +107,6 @@ or if you see an error like `rawPassword is null`, follow these steps:
    - Finally, restart the application.
 
 This process should help resolve the issues related to these annotations.
-
-
 
 ## Postman Request Examples 📮
 
@@ -172,7 +173,6 @@ To view all users and their orders, send a GET request with authorization to:
 
 `http://localhost:8080/api/v1/client/displayall`
 
-
 ### 6. Changing Profile Image
 
 To change a user's profile image, send a POST request to:
@@ -183,6 +183,6 @@ To change a user's profile image, send a POST request to:
 
 ```json
 {
-    "profileImageUrl": "https://link-to-your-image.com/image.jpg"
+    "https://link-to-your-image.com/image.jpg"
 }
 ```
