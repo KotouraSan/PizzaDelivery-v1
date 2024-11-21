@@ -53,7 +53,7 @@ To set up this project locally:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/pizzeria-backend.git
+   git clone https://github.com/KotouraSan/PizzaDelivery-v1.git
    cd pizzeria-backend
    ```
 
